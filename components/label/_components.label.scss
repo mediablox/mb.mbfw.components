@@ -1,0 +1,66 @@
+/* ==========================================================================
+   # LABEL
+   ========================================================================== */
+
+/**
+ * Labels scale to match the size of the immediate parent element by using
+ * relative font sizing and em units.
+ */
+
+/**
+	<div class="c-label c-label--primary c-label--square">1</div>
+	<div class="c-label c-label--secondary c-label--circle">2</div>
+	<div class="c-label c-label--tertiary">New</div>
+	<div class="c-label c-label--alert">Updated</div>
+	<div class="c-label c-label--warning">Ready</div>
+	<div class="c-label c-label--success">Steady</div>
+	<div class="c-label c-label--info">Go</div>
+*/
+
+/**
+ * 1. Set item to inline-block
+ * 2. Set margins and padding for the item
+ * 3. Apply styling to the font
+ * 4. Align item to center of label
+ * 5. Set font colour
+ * 6. Add rounded corners to item
+ * 7. Set background colour of item
+ * 8. Make item a perfect square
+ * 9. Make item a complete circle
+ */
+
+$mb-label-margin: 0 0 0 0.5rem !default;
+$mb-label-padding: 0.25em 0.4em !default;
+$mb-label-font-size: 75% !default;
+$mb-label-font-weight: 700 !default;
+$mb-label-font-color: $color-white !default;
+
+.c-label {
+	display: inline-block; /* [1] */
+	margin: $mb-label-margin; /* [2] */
+	padding: $mb-label-padding; /* [2] */
+	font-size: $mb-label-font-size; /* [3] */
+	font-weight: $mb-label-font-weight; /* [3] */
+	line-height: 1; /* [3] */
+	text-align: center; /* [4] */
+	white-space: nowrap; /* [4] */
+	vertical-align: baseline; /* [4] */
+	color: $mb-label-font-color; /* [5] */
+	border-radius: $global-radius; /* [6] */
+	@each $name, $color in $color-palette {
+		&--#{$name} {
+			background-color: $color; /* [7] */
+		}
+	}
+	@each $name, $color in $alert-colors {
+		&--#{$name} {
+			background-color: $color; /* [7] */
+		}
+	}
+	&--square {
+		border-radius: 0%; /* [8] */
+	}
+	&--circle {
+		border-radius: 50%; /* [9] */
+	}
+}

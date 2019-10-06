@@ -1,0 +1,64 @@
+/* ==========================================================================
+   # ALERT
+   ========================================================================== */
+
+/**
+ * Provide contextual feedback messages for typical user actions with a
+ * handful of available and flexible alert messages.
+ */
+
+/**
+	<div class="c-alert c-alert--primary">
+		<div class="c-alert__icon">
+			<i class="fa fa-exclamation-triangle fa-2x"></i>
+		</div>
+		<div class="c-alert__content">This is an alert using the primary colour</div>
+	</div>
+*/
+
+/**
+ * 1. Set the container to be a flexbox item
+ * 2. Disable wrapping on the item
+ * 3. Align items to horizontal and vertical center
+ * 4. Add space around the outer edge of the component
+ * 5. Stop the icon container from resizing
+ * 6. Make the content take up all available space
+ */
+
+$mb-alert-margin: 0 1rem 1rem 1rem !default;
+$mb-alert-border-size: 0.1rem !default;
+$mb-alert-border-style: solid !default;
+$mb-alert-padding: 0.5rem !default; // Also used for border-left
+
+.c-alert {
+	display: flex; /* [1] */
+	flex-wrap: nowrap; /* [2] */
+	justify-content: center; /* [3] */
+	align-items: center; /* [3] */
+	align-content: center; /* [3] */
+	margin: $mb-alert-margin; /* [4] */
+
+	.c-alert__icon {
+		flex: none; /* [5] */
+		padding: $mb-alert-padding;
+	}
+
+	.c-alert__content {
+		flex-grow: 1; /* [6] */
+		padding: $mb-alert-padding;
+	}
+
+	// Generate additonal classes for each colour variation
+	@each $name, $color in $alert-colors {
+		&--#{$name} {
+			border: $mb-alert-border-size $mb-alert-border-style $color;
+			border-left: $mb-alert-padding $mb-alert-border-style $color;
+			background-color: lighten($color, 45%);
+
+			.c-alert__icon,
+			.c-alert__content {
+				color: $color;
+			}
+		}
+	}
+}

@@ -1,0 +1,105 @@
+/* ==========================================================================
+   # BADGE
+   ========================================================================== */
+
+/**
+ * Badges are highly visual notices. They are to be used in conjunction with
+ * icons to make them stand out on a page.
+ */
+
+/**
+	<div class="c-badge c-badge--primary c-badge--square">1</div>
+	<div class="c-badge c-badge--secondary c-badge--circle">2</div>
+	<div class="c-badge c-badge--tertiary">New</div>
+	<div class="c-badge c-badge--alert">Updated</div>
+	<div class="c-badge c-badge--warning">Ready</div>
+	<div class="c-badge c-badge--success">Steady</div>
+	<div class="c-badge c-badge--info">Go</div>
+*/
+
+/**
+ * 1. Set item to inline-flex
+ * 2. Disable wrapping on the item
+ * 3. Align items to horizontal and vertical center
+ * 4. Add space around the outer edge of the component
+ */
+
+$mb-badge-padding: 0.25em !default;
+$mb-badge-font-size: 1em !default;
+$mb-badge-font-weight: bold !default;
+$mb-badge-border-size: 0.1rem !default;
+$mb-badge-border-style: solid !default;
+$mb-badge-border-radius: 0.3rem !default;
+
+.c-badge {
+	display: inline-flex; /* [1] */
+	flex-wrap: nowrap; /* [2] */
+	justify-content: center; /* [3] */
+	align-items: center; /* [3] */
+	align-content: center; /* [3] */
+	border-radius: $mb-badge-border-radius;
+	position: relative;
+	@include mq($from: tablet) {
+		margin-top: 0;
+	}
+
+	&__feature {
+		padding: $mb-badge-padding;
+		flex: none;
+	}
+
+	&__content {
+		flex-grow: 1;
+		padding: $mb-badge-padding;
+		font-size: $mb-badge-font-size;
+		font-weight: $mb-badge-font-weight;
+	}
+
+	&__tooltip {
+		display: none;
+		position: absolute;
+		background-color: color(primary);
+		color: $color-white;
+		font-size: 0.75rem;
+		width: max-content;
+		max-width: 220px;
+		bottom: 3rem;
+		border-radius: $global-radius;
+		padding: $global-spacing-small;
+		&:before,
+		&:after {
+			content: " ";
+			height: 0;
+			position: absolute;
+			width: 0;
+			border: 1rem solid transparent;
+		}
+		&:before {
+			border-top-color: color(primary);
+			position: absolute;
+			bottom: -1.5rem;
+			left: 45%;
+			z-index: 2;
+		}
+	}
+
+	.is-active {
+		.c-badge__tooltip {
+			display: block;
+		}
+	}
+
+	@each $name, $color in $color-palette {
+		&--#{$name} {
+			border: $mb-badge-border-size $mb-badge-border-style $color;
+			background-color: lighten($color, 45%);
+			.c-badge__feature {
+				background-color: $color;
+				color: lighten($color, 45%);
+			}
+			.c-badge__content {
+				color: $color;
+			}
+		}
+	}
+}
